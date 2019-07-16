@@ -1,0 +1,16 @@
+type Todo {
+  id: Int!
+  text: String!
+  isCompleted: Boolean!
+  isImportant: Boolean!
+}
+
+type Query {
+  todoList: [Todo]!
+  todo(id: Int!): Todo
+}
+
+type Mutation {
+  addTodo(text: String!): Todo!
+  updateTodo(id: Int!, text: String!, isCompleted: Boolean!, isImportant: Boolean!): Todo!
+}
