@@ -12,7 +12,7 @@ export let todoList = [
   new Todo({ id: 1, text: 'first', description: '첫번째' })
 ]
 
-export const getTodo = id => todoList.find(todo => todo.id === id)
+export const getTodo = id => todoList.find(todo => todo.id === Number(id))
 
 export const makeTodoId = () => Math.max(...todoList.map(o => o.id), 1) + 1
 
@@ -29,8 +29,8 @@ export const addTodo = (text, description) => {
 export const updateTodo = ({ id, ...rest }) => {
   let targetTodo = null
   todoList = todoList.map(todo => {
-    if (todo.id === id) {
-      targetTodo = new Todo({ ...todo, rest })
+    if (todo.id === Number(id)) {
+      targetTodo = new Todo({ ...todo, ...rest })
       return targetTodo
     } else {
       return todo
@@ -40,6 +40,10 @@ export const updateTodo = ({ id, ...rest }) => {
 }
 
 export const deleteTodo = id => {
-  const targetIndex = todoList.findIndex(todo => todo.id === id)
+  const targetIndex = todoList.findIndex(todo => todo.id === Number(id))
+
+  if (targetIndex == -1) {
+    throw Error('삭제할 Todo가 없습니다.')
+  }
   return todoList.splice(targetIndex, 1)[0]
 }
