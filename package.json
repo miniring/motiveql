@@ -5,19 +5,17 @@
   "repository": "https://github.com/miniring/motiveql.git",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js",
+    "dev": "nodemon index.js --exec babel-node",
     "test": "mocha --require @babel/register 'test/**/**spec.js'"
   },
   "dependencies": {
-    "@babel/register": "^7.5.5",
     "graphql-yoga": "^1.18.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/node": "^7.5.0",
     "@babel/preset-env": "^7.5.4",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^7.0.0-bridge.0",
+    "@babel/register": "^7.5.5",
     "chai": "^4.2.0",
     "mocha": "^6.1.4"
   }

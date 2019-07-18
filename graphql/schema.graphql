@@ -24,4 +24,8 @@ type Mutation {
     isCompleted: Boolean!,
     isImportant: Boolean!
   ): Todo!
+
+  deleteTodo(
+    id: ID
+  ): Todo!
 }
