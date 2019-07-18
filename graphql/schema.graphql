@@ -1,16 +1,27 @@
 type Todo {
-  id: Int!
+  id: ID
   text: String!
+  description: String
   isCompleted: Boolean!
   isImportant: Boolean!
 }
 
 type Query {
   todoList: [Todo]!
-  todo(id: Int!): Todo
+  todo(id: ID): Todo
 }
 
 type Mutation {
-  addTodo(text: String!): Todo!
-  updateTodo(id: Int!, text: String!, isCompleted: Boolean!, isImportant: Boolean!): Todo!
+  addTodo(
+    text: String!,
+    description: String
+  ): Todo!
+
+  updateTodo(
+    id: ID,
+    text: String!,
+    description: String,
+    isCompleted: Boolean!,
+    isImportant: Boolean!
+  ): Todo!
 }

@@ -1,4 +1,4 @@
-import { todoList, getTodo, addTodo, updateTodo } from './db'
+import { todoList, getTodo, addTodo, updateTodo, deleteTodo } from './db'
 
 const resolvers = {
   Query: {
@@ -6,8 +6,9 @@ const resolvers = {
     todo: (_, { id }) => getTodo(id)
   },
   Mutation: {
-    addTodo: (_, { text }) => addTodo(text),
-    updateTodo: (_, args) => updateTodo(args)
+    addTodo: (_, { text, description }) => addTodo(text, description),
+    updateTodo: (_, args) => updateTodo(args),
+    deleteTodo: (_, { id }) => deleteTodo(id)
   }
 }
 

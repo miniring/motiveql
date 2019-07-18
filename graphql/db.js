@@ -1,35 +1,45 @@
-export let todoList = [
-  {
-    id: 1,
-    text: 'first',
-    isCompleted: false,
-    isImportant: false
+export class Todo {
+  constructor({id, text, description}) {
+    this.id = id
+    this.text = text
+    this.description = description
+    this.isCompleted = false
+    this.isImportant = false
   }
+}
+
+export let todoList = [
+  new Todo({ id: 1, text: 'first', description: '첫번째' })
 ]
 
 export const getTodo = id => todoList.find(todo => todo.id === id)
 
-export const addTodo = text => {
-  const nextId = Math.max(...todoList.map(o => o.id), 1) + 1
-  const newTodo = {
-    id: nextId,
+export const makeTodoId = () => Math.max(...todoList.map(o => o.id), 1) + 1
+
+export const addTodo = (text, description) => {
+  const newTodo = new Todo({
+    id: makeTodoId(),
     text,
-    isCompleted: false,
-    isImportant: false
-  }
+    description
+  })
   todoList.push(newTodo)
   return newTodo
 }
 
-export const updateTodo = ({ id, text, isCompleted, isImportant }) => {
+export const updateTodo = ({ id, ...rest }) => {
   let targetTodo = null
   todoList = todoList.map(todo => {
     if (todo.id === id) {
-      targetTodo = { ...todo, text, isCompleted, isImportant }
+      targetTodo = new Todo({ ...todo, rest })
       return targetTodo
     } else {
       return todo
     }
   })
   return targetTodo
+}
+
+export const deleteTodo = id => {
+  const targetIndex = todoList.findIndex(todo => todo.id === id)
+  return todoList.splice(targetIndex, 1)[0]
 }
