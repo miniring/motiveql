@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { Todo, todoList, getTodo, addTodo, updateTodo, deleteTodo, makeTodoId } from '../graphql/db'
+import { Todo, todoList, getTodo, addTodo, updateTodo, deleteTodo } from '../graphql/db'
 
 describe('graphql DB test!! 🔫 🔫 🔫', () => {
   it('todoList는 배열이다.', () => {
@@ -11,15 +11,9 @@ describe('graphql DB test!! 🔫 🔫 🔫', () => {
     expect(todo instanceof Todo).to.equal(true)
   })
 
-  it('makeTodoId는 Int 형식의 고유 아이디를 만든다.', () => {
-    const num = makeTodoId()
-    expect(Number.isInteger(num)).to.equal(true)
-  })
-
   it('addTodo는 Todo를 리턴하고 리스트의 길이가 1 증가한다.', () => {
     const todoListLength = todoList.length
     const todo = addTodo(new Todo({
-      id: makeTodoId(),
       text: 'test',
       description: 'test description'
     }))
@@ -29,7 +23,6 @@ describe('graphql DB test!! 🔫 🔫 🔫', () => {
 
   it('updateTodo는 내용을 수정하고 Todo를 리턴한다.', () => {
     const todo = addTodo(new Todo({
-      id: makeTodoId(),
       text: 'test',
       description: 'test description'
     }))

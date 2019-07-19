@@ -1,6 +1,8 @@
+let ID = 1
+
 export class Todo {
-  constructor({id, text, description}) {
-    this.id = id
+  constructor({text, description}) {
+    this.id = ID++
     this.text = text
     this.description = description
     this.isCompleted = false
@@ -9,16 +11,14 @@ export class Todo {
 }
 
 export let todoList = [
-  new Todo({ id: 1, text: 'first', description: '첫번째' })
+  new Todo({ text: 'first', description: '첫번째' })
 ]
 
-export const getTodo = id => todoList.find(todo => todo.id === Number(id))
-
-export const makeTodoId = () => Math.max(...todoList.map(o => o.id), 1) + 1
+const getTodoIndex = id => todoList.findIndex(todo => todo.id === Number(id))
+export const getTodo = id => todoList[getTodoIndex(id)]
 
 export const addTodo = (text, description) => {
   const newTodo = new Todo({
-    id: makeTodoId(),
     text,
     description
   })
@@ -27,20 +27,15 @@ export const addTodo = (text, description) => {
 }
 
 export const updateTodo = ({ id, ...rest }) => {
-  let targetTodo = null
-  todoList = todoList.map(todo => {
-    if (todo.id === Number(id)) {
-      targetTodo = new Todo({ ...todo, ...rest })
-      return targetTodo
-    } else {
-      return todo
-    }
-  })
-  return targetTodo
+  const index = getTodoIndex(id)
+  const newTodo = new Todo({ ...todoList[index], ...rest })
+  todoList.splice(index, 1, newTodo)
+
+  return newTodo
 }
 
 export const deleteTodo = id => {
-  const targetIndex = todoList.findIndex(todo => todo.id === Number(id))
+  const targetIndex = getTodoIndex(id)
 
   if (targetIndex == -1) {
     throw Error('삭제할 Todo가 없습니다.')
