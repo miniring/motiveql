@@ -38,8 +38,6 @@ export const updateTodo = ({ id, text, description, isCompleted, ordering, compl
   todo.isCompleted = isCompleted
   todo.ordering = ordering
   todo.completedAt = completedAt
-  console.log(completedAt)
-  console.log(todo)
   return todo
 }
 
