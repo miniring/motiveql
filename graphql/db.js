@@ -5,6 +5,7 @@ export class Todo {
     this.id = ID++
     this.text = text
     this.description = description
+    this.completedAt = ''
     this.isCompleted = isCompleted
     this.ordering = ordering
   }
@@ -30,13 +31,15 @@ export const addTodo = (text, description='', ordering) => {
   return newTodo
 }
 
-export const updateTodo = ({ id, text, description, isCompleted, ordering }) => {
+export const updateTodo = ({ id, text, description, isCompleted, ordering, completedAt }) => {
   const todo = getTodo(id)
   todo.text = text
   todo.description = description
   todo.isCompleted = isCompleted
   todo.ordering = ordering
-
+  todo.completedAt = completedAt
+  console.log(completedAt)
+  console.log(todo)
   return todo
 }
 

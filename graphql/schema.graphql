@@ -4,6 +4,7 @@ type Todo {
   description: String
   isCompleted: Boolean!
   ordering: Int
+  completedAt: String
 }
 
 type Query {
@@ -23,6 +24,7 @@ type Mutation {
     text: String!,
     description: String!,
     isCompleted: Boolean!,
+    completedAt: String
     ordering: Int!
   ): Todo!
 
