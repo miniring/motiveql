@@ -6,7 +6,7 @@ const resolvers = {
     todo: (_, { id }) => getTodo(id)
   },
   Mutation: {
-    addTodo: (_, { text, description }) => addTodo(text, description),
+    addTodo: (_, { text, description, ordering }) => addTodo(text, description, ordering),
     updateTodo: (_, args) => updateTodo(args),
     deleteTodo: (_, { id }) => deleteTodo(id)
   }

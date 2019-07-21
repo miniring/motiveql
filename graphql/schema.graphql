@@ -3,7 +3,7 @@ type Todo {
   text: String!
   description: String
   isCompleted: Boolean!
-  isImportant: Boolean!
+  ordering: Int
 }
 
 type Query {
@@ -15,14 +15,15 @@ type Mutation {
   addTodo(
     text: String!,
     description: String
+    ordering: Int
   ): Todo!
 
   updateTodo(
-    id: ID,
+    id: ID!,
     text: String!,
-    description: String,
+    description: String!,
     isCompleted: Boolean!,
-    isImportant: Boolean!
+    ordering: Int!
   ): Todo!
 
   deleteTodo(
